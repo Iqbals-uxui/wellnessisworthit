@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wellness Is Worth It — Curated Tools for Better Living</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #fbfbfa; --bg-card: #ffffff; --text: #19191d; --text-muted: #60606a;
+      --accent: #2b5c47; --accent-hover: #1c3d2f; --accent-light: #eef5f1;
+      --border: #e4e4e7; --font-heading: 'Outfit', sans-serif; --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+    [data-theme="dark"] {
+      --bg: #0d0d11; --bg-card: #14141a; --text: #f3f3f5; --text-muted: #9494a1;
+      --accent: #3da077; --accent-hover: #52b788; --accent-light: #162920; --border: #272730;
+    }
+    html { scroll-behavior: smooth; background: var(--bg); }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-body); line-height: 1.7; transition: background 0.3s, color 0.3s; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; font-family: var(--font-body); outline: none; }
+
+    /* DISCLOSURE */
+    .disclosure-banner {
+      background: var(--accent-light); border-bottom: 1px solid var(--border);
+      padding: 10px 20px; text-align: center; font-size: 0.8rem; color: var(--text-muted); font-weight: 500;
+    }
+    .disclosure-banner strong { color: var(--accent); }
+
+    /* NAV */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(251,251,250,0.88); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); transition: background 0.3s;
+    }
+    [data-theme="dark"] header { background: rgba(13,13,17,0.88); }
+    .nav-container { max-width: 1100px; margin: 0 auto; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: var(--font-heading); font-weight: 800; font-size: 1.35rem; letter-spacing: -0.5px; }
+    .logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 0.95rem; font-weight: 500; color: var(--text-muted); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .theme-toggle {
+      width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border);
+      background: var(--bg-card); display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); transition: all 0.2s;
+    }
+    .theme-toggle:hover { color: var(--text); border-color: var(--text-muted); }
+    .theme-toggle svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; }
+
+    /* HERO */
+    .hero { max-width: 780px; margin: 0 auto; padding: 56px 20px 28px; }
+    .meta-tag {
+      display: inline-block; padding: 6px 14px; background: var(--accent-light);
+      color: var(--accent); font-weight: 700; font-size: 0.78rem;
+      border-radius: 999px; text-transform: uppercase; letter-spacing: 0.5px;
+      margin-bottom: 18px; font-family: var(--font-heading);
+    }
+    .hero h1 {
+      font-family: var(--font-heading); font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800; line-height: 1.15; letter-spacing: -1px; margin-bottom: 18px;
+    }
+    .author-strip {
+      display: flex; align-items: center; gap: 12px; margin-top: 22px;
+      padding-bottom: 22px; border-bottom: 1px solid var(--border);
+    }
+    .author-img { width: 42px; height: 42px; border-radius: 50%; background: var(--accent-light); color: var(--accent); display: grid; place-items: center; font-weight: 700; font-size: 0.8rem; }
+    .author-info p { font-size: 0.9rem; font-weight: 600; }
+    .author-info span { font-size: 0.8rem; color: var(--text-muted); }
+
+    /* LAYOUT */
+    .main-layout {
+      max-width: 1100px; margin: 0 auto; padding: 0 20px 80px;
+      display: grid; grid-template-columns: 1fr 300px; gap: 56px;
+    }
+    .article-body p.intro { font-size: 1.1rem; color: var(--text); margin: 28px 0 24px; line-height: 1.75; }
+    .result-count { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    .result-count strong { color: var(--text); }
+
+    /* PRODUCT CARDS */
+    .product-node {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px;
+      padding: 28px; margin-bottom: 40px; box-shadow: 0 2px 16px rgba(0,0,0,0.03);
+      transition: box-shadow 0.2s;
+    }
+    .product-node.hidden { display: none; }
+    .product-node:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.06); }
+    .product-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; flex-wrap: wrap; }
+    .product-number {
+      font-family: var(--font-heading); font-size: 1rem; font-weight: 800;
+      color: var(--accent); background: var(--accent-light);
+      width: 34px; height: 34px; border-radius: 8px; display: grid; place-items: center; flex-shrink: 0;
+    }
+    .product-title-area { flex: 1; }
+    .product-title { font-family: var(--font-heading); font-size: 1.35rem; font-weight: 700; margin-bottom: 3px; }
+    .product-brand { font-size: 0.83rem; color: var(--text-muted); font-weight: 500; }
+    .quick-specs {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 10px; background: var(--bg); padding: 14px; border-radius: 10px;
+      margin-bottom: 20px; border: 1px solid var(--border);
+    }
+    .spec-label { color: var(--text-muted); display: block; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; }
+    .spec-val { font-weight: 700; color: var(--text); font-size: 0.88rem; }
+    .product-desc { margin-bottom: 22px; color: var(--text-muted); font-size: 1rem; line-height: 1.7; }
+    .pro-con-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+    .pc-box { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+    .pc-box h5 { font-family: var(--font-heading); font-size: 0.8rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.4px; }
+    .pc-box ul { list-style: none; font-size: 0.88rem; }
+    .pc-box li { position: relative; padding-left: 18px; margin-bottom: 6px; color: var(--text-muted); }
+    .pro-box h5 { color: #2b5c47; }
+    .pro-box li::before { content: "✓"; position: absolute; left: 0; color: #2b5c47; font-weight: bold; }
+    .con-box h5 { color: #a63a3a; }
+    .con-box li::before { content: "✕"; position: absolute; left: 0; color: #a63a3a; font-weight: bold; }
+    .affiliate-action {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 18px; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 14px;
+    }
+    .price-tag { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800; }
+    .price-tag span { font-size: 0.82rem; color: var(--text-muted); font-weight: 400; display: block; line-height: 1.2; }
+    .btn-affiliate {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 26px; background: var(--accent); color: #fff;
+      border-radius: 10px; font-weight: 600; font-size: 0.92rem;
+      box-shadow: 0 4px 14px rgba(43,92,71,0.18); transition: all 0.2s;
+    }
+    .btn-affiliate:hover { background: var(--accent-hover); transform: translateY(-1px); }
+
+    #no-results {
+      text-align: center; padding: 40px; border: 2px dashed var(--border);
+      border-radius: 16px; color: var(--text-muted); display: none; font-size: 0.95rem;
+    }
+
+    /* SIDEBAR */
+    .sidebar { position: relative; }
+    .sidebar-sticky { position: sticky; top: 90px; display: flex; flex-direction: column; gap: 20px; }
+    .widget { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 22px; }
+    .widget-title { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; }
+    .search-input {
+      width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid var(--border);
+      background: var(--bg); color: var(--text); font-family: inherit; font-size: 0.9rem; transition: border-color 0.2s;
+    }
+    .search-input:focus { outline: none; border-color: var(--accent); }
+    .category-pills { display: flex; flex-wrap: wrap; gap: 7px; list-style: none; }
+    .category-pills button {
+      padding: 7px 13px; border-radius: 8px; border: 1px solid var(--border);
+      background: var(--bg); color: var(--text-muted); font-size: 0.83rem; font-weight: 500; transition: all 0.2s;
+    }
+    .category-pills button:hover, .category-pills button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .newsletter-widget { background: var(--accent-light); border-color: transparent; }
+    .newsletter-widget .widget-title { color: var(--accent); }
+    .newsletter-widget p { font-size: 0.83rem; color: var(--text-muted); margin-bottom: 14px; line-height: 1.55; }
+    .newsletter-form input {
+      width: 100%; padding: 11px; border-radius: 8px; border: 1px solid var(--border);
+      background: var(--bg-card); color: var(--text); font-family: inherit; margin-bottom: 8px; outline: none; font-size: 0.88rem;
+    }
+    .newsletter-form button {
+      width: 100%; padding: 11px; border: none; border-radius: 8px;
+      background: var(--accent); color: #fff; font-weight: 600; transition: background 0.2s; font-size: 0.88rem;
+    }
+    .newsletter-form button:hover { background: var(--accent-hover); }
+
+    @media (max-width: 900px) {
+      .main-layout { grid-template-columns: 1fr; gap: 32px; }
+      .sidebar { order: -1; }
+      .sidebar-sticky { position: static; }
+      .pro-con-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="disclosure-banner">
+    <strong>Disclosure:</strong> This site contains affiliate links. As an Amazon Associate we earn from qualifying purchases — at no extra cost to you.
+  </div>
+
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo">Wellness<span>IsWorthIt</span>.</a>
+      <ul class="nav-links">
+        <li><a href="#recommendations">Wellness Gear</a></li>
+        <li><a href="#">Deep Dives</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+          <svg id="themeIcon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <span class="meta-tag">✦ Wellness Gear</span>
+    <h1>Wellness Upgrades That Are Actually Worth the Money</h1>
+    <div class="author-strip">
+      <div class="author-img">WI</div>
+      <div class="author-info">
+        <p>WellnessIsWorthIt Editorial</p>
+        <span>Updated June 2026 · 6 min read</span>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-layout">
+
+    <aside class="sidebar">
+      <div class="sidebar-sticky">
+
+        <div class="widget">
+          <h4 class="widget-title">Search</h4>
+          <input type="text" id="search-bar" class="search-input" placeholder="e.g. sleep, cork, light..." oninput="filterProducts()" aria-label="Search products" />
+        </div>
+
+        <div class="widget">
+          <h4 class="widget-title">Category</h4>
+          <ul class="category-pills">
+            <li><button class="active" onclick="setCategory('all', this)">All</button></li>
+            <li><button onclick="setCategory('sleep', this)">Sleep</button></li>
+            <li><button onclick="setCategory('mobility', this)">Mobility</button></li>
+            <li><button onclick="setCategory('cognitive', this)">Focus</button></li>
+          </ul>
+        </div>
+
+        <div class="widget newsletter-widget">
+          <h4 class="widget-title">Newsletter</h4>
+          <p>Honest picks, no sponsored noise. New recommendations when they're actually worth sharing.</p>
+          <form class="newsletter-form" onsubmit="handleSubscribe(event)">
+            <input type="email" placeholder="your@email.com" required />
+            <button type="submit">Get the Newsletter</button>
+          </form>
+        </div>
+
+      </div>
+    </aside>
+
+    <div class="article-body">
+      <p class="intro">The wellness industry sells overhauls. What actually works is more boring — small, structural upgrades that protect your sleep, your body, and your focus. These are the ones worth spending money on.</p>
+
+      <p class="result-count" id="result-count"><strong>3 items</strong> across all categories</p>
+
+      <div id="recommendations">
+
+        <article class="product-node" data-category="sleep" data-title="weighted silk sleep mask blackout">
+          <div class="product-header">
+            <div class="product-number">01</div>
+            <div class="product-title-area">
+              <h3 class="product-title">Blackout Weighted Silk Sleep Mask</h3>
+              <span class="product-brand">Sleep Hygiene</span>
+            </div>
+          </div>
+          <div class="quick-specs">
+            <div class="spec-item"><span class="spec-label">Material</span><span class="spec-val">Mulberry Silk</span></div>
+            <div class="spec-item"><span class="spec-label">Pressure</span><span class="spec-val">Weighted Beads</span></div>
+            <div class="spec-item"><span class="spec-label">Light Block</span><span class="spec-val">100%</span></div>
+          </div>
+          <p class="product-desc">Most eye masks fail at the nose bridge — light creeps in and disrupts sleep quality without you realising it. A contoured silk mask with weighted beads seals completely and applies gentle pressure that most users find noticeably calming. The silk also avoids the skin creasing that synthetic masks leave overnight. If you regularly wake feeling less rested than expected, this is a sensible first thing to try.</p>
+          <div class="pro-con-grid">
+            <div class="pc-box pro-box">
+              <h5>Worth it because</h5>
+              <ul>
+                <li>Seals properly at the nose bridge</li>
+                <li>Non-irritating on sensitive skin</li>
+                <li>Noticeably better than cheap alternatives</li>
+              </ul>
+            </div>
+            <div class="pc-box con-box">
+              <h5>The catch</h5>
+              <ul>
+                <li>Hand wash only</li>
+                <li>Takes a few nights to get used to the weight</li>
+              </ul>
+            </div>
+          </div>
+          <div class="affiliate-action">
+            <div class="price-tag"><span>From approximately</span>£34</div>
+            <a href="https://amazon.co.uk" target="_blank" rel="noopener nofollow sponsored" class="btn-affiliate">Check Price on Amazon →</a>
+          </div>
+        </article>
+
+        <article class="product-node" data-category="mobility" data-title="cork massage roller foam roller recovery myofascial">
+          <div class="product-header">
+            <div class="product-number">02</div>
+            <div class="product-title-area">
+              <h3 class="product-title">High-Density Cork Foam Roller</h3>
+              <span class="product-brand">Mobility & Recovery</span>
+            </div>
+          </div>
+          <div class="quick-specs">
+            <div class="spec-item"><span class="spec-label">Material</span><span class="spec-val">Natural Cork</span></div>
+            <div class="spec-item"><span class="spec-label">Firmness</span><span class="spec-val">High Density</span></div>
+            <div class="spec-item"><span class="spec-label">Lifespan</span><span class="spec-val">Years, not months</span></div>
+          </div>
+          <p class="product-desc">Standard foam rollers compress and soften within a few months of regular use, at which point they're doing very little. Cork maintains its density indefinitely, is naturally antimicrobial, and doesn't absorb sweat the way foam does. It's a straightforward upgrade if you actually use a roller regularly — you buy it once rather than replacing a softened foam version every six months.</p>
+          <div class="pro-con-grid">
+            <div class="pc-box pro-box">
+              <h5>Worth it because</h5>
+              <ul>
+                <li>Doesn't degrade — buy it once</li>
+                <li>Naturally antimicrobial, no odour build-up</li>
+              </ul>
+            </div>
+            <div class="pc-box con-box">
+              <h5>The catch</h5>
+              <ul>
+                <li>Significantly harder than foam — uncomfortable at first</li>
+              </ul>
+            </div>
+          </div>
+          <div class="affiliate-action">
+            <div class="price-tag"><span>From approximately</span>£25</div>
+            <a href="https://amazon.co.uk" target="_blank" rel="noopener nofollow sponsored" class="btn-affiliate">Check Price on Amazon →</a>
+          </div>
+        </article>
+
+        <article class="product-node" data-category="cognitive" data-title="light therapy lamp SAD daylight 10000 lux focus energy winter">
+          <div class="product-header">
+            <div class="product-number">03</div>
+            <div class="product-title-area">
+              <h3 class="product-title">10,000 Lux Daylight Therapy Lamp</h3>
+              <span class="product-brand">Cognitive Focus & Mood</span>
+            </div>
+          </div>
+          <div class="quick-specs">
+            <div class="spec-item"><span class="spec-label">Output</span><span class="spec-val">10,000 Lux</span></div>
+            <div class="spec-item"><span class="spec-label">UV</span><span class="spec-val">UV-Free</span></div>
+            <div class="spec-item"><span class="spec-label">Daily Use</span><span class="spec-val">20–30 mins</span></div>
+          </div>
+          <p class="product-desc">In the UK, natural light from October to March is often genuinely insufficient — particularly if you work indoors. A 10,000 lux lamp used for 20 minutes in the morning has reasonable clinical backing for improving mood and energy in winter months. It won't fix everything, but it's one of the more evidence-supported things in this space and the cost is modest relative to other wellness purchases.</p>
+          <div class="pro-con-grid">
+            <div class="pc-box pro-box">
+              <h5>Worth it because</h5>
+              <ul>
+                <li>Clinical backing for mood and energy in winter</li>
+                <li>Relatively inexpensive for what it does</li>
+                <li>Particularly relevant for UK winters</li>
+              </ul>
+            </div>
+            <div class="pc-box con-box">
+              <h5>The catch</h5>
+              <ul>
+                <li>Takes up desk space</li>
+                <li>Takes a few weeks to notice a difference</li>
+              </ul>
+            </div>
+          </div>
+          <div class="affiliate-action">
+            <div class="price-tag"><span>From approximately</span>£40</div>
+            <a href="https://amazon.co.uk" target="_blank" rel="noopener nofollow sponsored" class="btn-affiliate">Check Price on Amazon →</a>
+          </div>
+        </article>
+
+        <div id="no-results">No items match that search. Try a different keyword or reset the filter.</div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    let currentCategory = 'all';
+
+    function setCategory(cat, btn) {
+      currentCategory = cat;
+      document.querySelectorAll('.category-pills button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterProducts();
+    }
+
+    function filterProducts() {
+      const query = document.getElementById('search-bar').value.toLowerCase().trim();
+      const products = document.querySelectorAll('.product-node');
+      let visible = 0;
+      products.forEach(p => {
+        const matchesCat = currentCategory === 'all' || p.dataset.category === currentCategory;
+        const searchable = p.dataset.title + ' ' + p.querySelector('.product-desc').textContent.toLowerCase();
+        const matchesQuery = !query || searchable.includes(query);
+        if (matchesCat && matchesQuery) { p.classList.remove('hidden'); visible++; }
+        else { p.classList.add('hidden'); }
+      });
+      document.getElementById('no-results').style.display = visible === 0 ? 'block' : 'none';
+      const catLabel = currentCategory === 'all' ? 'all categories' : currentCategory;
+      document.getElementById('result-count').innerHTML =
+        `<strong>${visible} item${visible !== 1 ? 's' : ''}</strong> ${query ? `matching "${query}"` : `in ${catLabel}`}`;
+    }
+
+    function handleSubscribe(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      btn.textContent = "✓ You're on the list";
+      btn.style.background = '#1c3d2f';
+      e.target.querySelector('input').disabled = true;
+      btn.disabled = true;
+    }
+
+    (function() {
+      const saved = localStorage.getItem('wiwi-theme');
+      if (saved) { document.documentElement.setAttribute('data-theme', saved); }
+      else if (window.matchMedia('(prefers-color-scheme: dark)').matches) { document.documentElement.setAttribute('data-theme', 'dark'); }
+      updateIcon();
+    })();
+
+    function toggleTheme() {
+      const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('wiwi-theme', next);
+      updateIcon();
+    }
+
+    function updateIcon() {
+      const icon = document.getElementById('themeIcon');
+      if (!icon) return;
+      icon.innerHTML = document.documentElement.getAttribute('data-theme') === 'light'
+        ? '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>'
+        : '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+    }
+  </script>
+</body>
+</html>
