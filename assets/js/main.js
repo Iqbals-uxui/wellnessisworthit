@@ -1,12 +1,13 @@
 /* ============================================================
    WellnessIsWorthIt — Shared JavaScript
-   Covers: theme toggle, newsletter, product filter, category
-           scroll behaviour
+   Covers: theme toggle, newsletter, product filter (post pages),
+           post category filter (homepage)
    ============================================================ */
+
 
 // ── THEME ─────────────────────────────────────────────────────
 // Always default to light. Only use dark if user has previously
-// toggled it manually.
+// toggled it manually — never follow system dark mode preference.
 (function () {
   var saved = localStorage.getItem('wiwi-theme');
   var theme = (saved === 'dark') ? 'dark' : 'light';
@@ -45,7 +46,7 @@ function updateIcon() {
 
 
 // ── NEWSLETTER ────────────────────────────────────────────────
-// Handles both sidebar newsletter and homepage newsletter forms
+// Handles both sidebar newsletter (post pages) and homepage form.
 function handleSubscribe(e) {
   e.preventDefault();
   var btn = e.target.querySelector('button');
@@ -58,9 +59,87 @@ function handleSubscribe(e) {
 }
 
 
-// ── PRODUCT FILTER & CATEGORY (post pages only) ───────────────
-// These functions only run on post pages where the relevant
-// elements exist. Guards prevent errors on the homepage.
+// ── HOMEPAGE: POST CATEGORY FILTER ────────────────────────────
+// Filters post cards on the homepage by category.
+// Only runs when the homepage filter elements are present.
+
+var currentPostCategory = 'all';
+
+function setPostCategory(cat, btn) {
+  // Guard: only run on homepage
+  if (!document.getElementById('post-listing')) return;
+
+  currentPostCategory = cat;
+
+  // Update active pill state
+  var buttons = document.querySelectorAll('.homepage-filter-pills button');
+  for (var i = 0; i < buttons.length; i++) {
+    buttons[i].classList.remove('active');
+  }
+  btn.classList.add('active');
+
+  filterPosts();
+}
+
+function filterPosts() {
+  if (!document.getElementById('post-listing')) return;
+
+  // Gather all filterable cards — featured + grid cards
+  var featuredCard = document.querySelector('.post-card-featured');
+  var gridCards = document.querySelectorAll('.post-grid .post-card');
+  var visible = 0;
+
+  // Filter featured card
+  if (featuredCard) {
+    var featCat = featuredCard.getAttribute('data-post-category') || '';
+    if (currentPostCategory === 'all' || featCat === currentPostCategory) {
+      featuredCard.style.display = '';
+      visible++;
+    } else {
+      featuredCard.style.display = 'none';
+    }
+  }
+
+  // Filter grid cards
+  for (var i = 0; i < gridCards.length; i++) {
+    var card = gridCards[i];
+    var cardCat = card.getAttribute('data-post-category') || '';
+    if (currentPostCategory === 'all' || cardCat === currentPostCategory) {
+      card.style.display = '';
+      visible++;
+    } else {
+      card.style.display = 'none';
+    }
+  }
+
+  // Show/hide the post grid wrapper — hide if no grid cards visible
+  var postGrid = document.getElementById('post-grid');
+  if (postGrid) {
+    var visibleGridCards = 0;
+    for (var j = 0; j < gridCards.length; j++) {
+      if (gridCards[j].style.display !== 'none') visibleGridCards++;
+    }
+    postGrid.style.display = visibleGridCards === 0 ? 'none' : '';
+  }
+
+  // Show/hide no-posts message
+  var noPosts = document.getElementById('no-posts');
+  if (noPosts) {
+    noPosts.style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  // Update post count label
+  var countEl = document.getElementById('post-count');
+  if (countEl) {
+    var catLabel = currentPostCategory === 'all' ? 'all categories' : currentPostCategory.replace('-', ' ');
+    countEl.textContent = visible + ' topic' + (visible !== 1 ? 's' : '') + ' in ' + catLabel;
+  }
+}
+
+
+// ── POST PAGES: PRODUCT FILTER & CATEGORY ─────────────────────
+// Filters product cards within an individual post page.
+// Only runs when post page filter elements are present.
 
 var currentCategory = 'all';
 
@@ -77,10 +156,10 @@ function setCategory(cat, btn) {
   }
   btn.classList.add('active');
 
-  // Run the filter first so content is correct before scrolling
+  // Run filter first, then scroll
   filterProducts();
 
-  // Scroll to top of product list, offset by sticky header height + buffer
+  // Scroll to top of product list offset by sticky header height + buffer
   var target = document.getElementById('result-count');
   var header = document.querySelector('header');
   if (target && header) {
