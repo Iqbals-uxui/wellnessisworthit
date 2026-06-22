@@ -69,7 +69,7 @@
     .author-info p { font-size: 0.9rem; font-weight: 600; }
     .author-info span { font-size: 0.8rem; color: var(--text-muted); }
 
-    /* LAYOUT */
+    /* LAYOUT — article-body left (wide), sidebar right (narrow) */
     .main-layout {
       max-width: 1100px; margin: 0 auto; padding: 0 20px 80px;
       display: grid; grid-template-columns: 1fr 300px; gap: 56px;
@@ -160,6 +160,7 @@
     }
     .newsletter-form button:hover { background: var(--accent-hover); }
 
+    /* RESPONSIVE */
     @media (max-width: 900px) {
       .main-layout { grid-template-columns: 1fr; gap: 32px; }
       .sidebar { order: -1; }
@@ -204,36 +205,7 @@
 
   <main class="main-layout">
 
-    <aside class="sidebar">
-      <div class="sidebar-sticky">
-
-        <div class="widget">
-          <h4 class="widget-title">Search</h4>
-          <input type="text" id="search-bar" class="search-input" placeholder="e.g. sleep, cork, light..." oninput="filterProducts()" aria-label="Search products" />
-        </div>
-
-        <div class="widget">
-          <h4 class="widget-title">Category</h4>
-          <ul class="category-pills">
-            <li><button class="active" onclick="setCategory('all', this)">All</button></li>
-            <li><button onclick="setCategory('sleep', this)">Sleep</button></li>
-            <li><button onclick="setCategory('mobility', this)">Mobility</button></li>
-            <li><button onclick="setCategory('cognitive', this)">Focus</button></li>
-          </ul>
-        </div>
-
-        <div class="widget newsletter-widget">
-          <h4 class="widget-title">Newsletter</h4>
-          <p>Honest picks, no sponsored noise. New recommendations when they're actually worth sharing.</p>
-          <form class="newsletter-form" onsubmit="handleSubscribe(event)">
-            <input type="email" placeholder="your@email.com" required />
-            <button type="submit">Get the Newsletter</button>
-          </form>
-        </div>
-
-      </div>
-    </aside>
-
+    <!-- ARTICLE BODY — left column, wide -->
     <div class="article-body">
       <p class="intro">The wellness industry sells overhauls. What actually works is more boring — small, structural upgrades that protect your sleep, your body, and your focus. These are the ones worth spending money on.</p>
 
@@ -355,6 +327,37 @@
       </div>
     </div>
 
+    <!-- SIDEBAR — right column, narrow, sticky -->
+    <aside class="sidebar">
+      <div class="sidebar-sticky">
+
+        <div class="widget">
+          <h4 class="widget-title">Search</h4>
+          <input type="text" id="search-bar" class="search-input" placeholder="e.g. sleep, cork, light..." oninput="filterProducts()" aria-label="Search products" />
+        </div>
+
+        <div class="widget">
+          <h4 class="widget-title">Category</h4>
+          <ul class="category-pills">
+            <li><button class="active" onclick="setCategory('all', this)">All</button></li>
+            <li><button onclick="setCategory('sleep', this)">Sleep</button></li>
+            <li><button onclick="setCategory('mobility', this)">Mobility</button></li>
+            <li><button onclick="setCategory('cognitive', this)">Focus</button></li>
+          </ul>
+        </div>
+
+        <div class="widget newsletter-widget">
+          <h4 class="widget-title">Newsletter</h4>
+          <p>Honest picks, no sponsored noise. New recommendations when they're actually worth sharing.</p>
+          <form class="newsletter-form" onsubmit="handleSubscribe(event)">
+            <input type="email" placeholder="your@email.com" required />
+            <button type="submit">Get the Newsletter</button>
+          </form>
+        </div>
+
+      </div>
+    </aside>
+
   </main>
 
   <script>
@@ -393,10 +396,14 @@
       btn.disabled = true;
     }
 
+    /* Default to light mode always — only switch dark if user manually toggles */
     (function() {
       const saved = localStorage.getItem('wiwi-theme');
-      if (saved) { document.documentElement.setAttribute('data-theme', saved); }
-      else if (window.matchMedia('(prefers-color-scheme: dark)').matches) { document.documentElement.setAttribute('data-theme', 'dark'); }
+      if (saved) {
+        document.documentElement.setAttribute('data-theme', saved);
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
       updateIcon();
     })();
 
