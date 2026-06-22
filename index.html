@@ -376,7 +376,7 @@
       let visible = 0;
       products.forEach(p => {
         const matchesCat = currentCategory === 'all' || p.dataset.category === currentCategory;
-        const searchable = p.dataset.title + ' ' + p.dataset.category + ' ' + p.querySelector('.product-desc').textContent.toLowerCase() + ' ' + p.querySelector('.product-brand').textContent.toLowerCase();        const matchesQuery = !query || searchable.includes(query);
+        const searchable = p.dataset.title + ' ' + p.dataset.category + ' ' + p.querySelector('.product-desc').textContent.toLowerCase() + ' ' + p.querySelector('.product-brand').textContent.toLowerCase();
         if (matchesCat && matchesQuery) { p.classList.remove('hidden'); visible++; }
         else { p.classList.add('hidden'); }
       });
