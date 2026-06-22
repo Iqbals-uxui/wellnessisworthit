@@ -64,61 +64,82 @@
 
     <div class="section-header">
       <h2 class="section-title">Latest Posts</h2>
-      <span class="section-subtitle">Honest picks, updated regularly</span>
+      <span class="section-subtitle" id="post-count">4 topics across all categories</span>
     </div>
 
-    <!-- FEATURED POST -->
-    <article class="post-card-featured">
-      <div>
-        <span class="featured-badge">Latest Post</span>
-        <span class="post-category-tag">Wellness Gear</span>
-        <h2>Wellness Upgrades That Are Actually Worth the Money</h2>
-        <p>Three products we think are genuinely worth spending money on — a blackout silk sleep mask, a cork foam roller, and a daylight therapy lamp. We explain exactly why each one earns its price tag.</p>
-        <div class="post-meta">
-          <span>Updated June 2026</span>
-          <span>·</span>
-          <span>6 min read</span>
+    <!-- CATEGORY FILTER BAR -->
+    <div class="homepage-filter">
+      <ul class="homepage-filter-pills">
+        <li><button class="active" onclick="setPostCategory('all', this)">All</button></li>
+        <li><button onclick="setPostCategory('wellness-gear', this)">Wellness Gear</button></li>
+        <li><button onclick="setPostCategory('skincare', this)">Skincare</button></li>
+        <li><button onclick="setPostCategory('supplements', this)">Supplements</button></li>
+        <li><button onclick="setPostCategory('sleep', this)">Sleep</button></li>
+      </ul>
+    </div>
+
+    <!-- ALL CARDS WRAPPER — filtered together -->
+    <div id="post-listing">
+
+      <!-- FEATURED POST -->
+      <article class="post-card-featured" data-post-category="wellness-gear">
+        <div>
+          <span class="featured-badge">Latest Post</span>
+          <span class="post-category-tag">Wellness Gear</span>
+          <h2>Wellness Upgrades That Are Actually Worth the Money</h2>
+          <p>Three products we think are genuinely worth spending money on — a blackout silk sleep mask, a cork foam roller, and a daylight therapy lamp. We explain exactly why each one earns its price tag.</p>
+          <div class="post-meta">
+            <span>Updated June 2026</span>
+            <span>·</span>
+            <span>6 min read</span>
+          </div>
+          <a href="posts/wellness-upgrades-worth-the-money.html" class="btn-read-post">Read Post →</a>
         </div>
-        <a href="posts/wellness-upgrades-worth-the-money.html" class="btn-read-post">Read Post →</a>
+        <div class="featured-product-count">
+          <div class="count-number">3</div>
+          <div class="count-label">Products<br>reviewed</div>
+        </div>
+      </article>
+
+      <!-- POST GRID -->
+      <div class="post-grid" id="post-grid">
+
+        <article class="post-card coming-soon" data-post-category="skincare">
+          <span class="post-category-tag">Skincare</span>
+          <h3>Skincare Ingredients That Are Actually Worth Paying More For</h3>
+          <p>Retinol, vitamin C, niacinamide — we break down which ingredients have real evidence behind them and which ones you're paying a premium for nothing.</p>
+          <div class="post-card-footer">
+            <span class="post-card-read-time">8 min read</span>
+            <span class="coming-soon-badge">Coming Soon</span>
+          </div>
+        </article>
+
+        <article class="post-card coming-soon" data-post-category="supplements">
+          <span class="post-category-tag">Supplements</span>
+          <h3>The Supplements Actually Worth Taking — And the Ones That Aren't</h3>
+          <p>Most supplements are expensive urine. A handful are genuinely backed by evidence. We go through the research so you know which ones are worth your money.</p>
+          <div class="post-card-footer">
+            <span class="post-card-read-time">10 min read</span>
+            <span class="coming-soon-badge">Coming Soon</span>
+          </div>
+        </article>
+
+        <article class="post-card coming-soon" data-post-category="sleep">
+          <span class="post-category-tag">Sleep</span>
+          <h3>Is a Weighted Blanket Worth It? What the Evidence Actually Says</h3>
+          <p>Weighted blankets are everywhere. We look at the clinical evidence, the different weights and materials, and whether the premium price tags are justified.</p>
+          <div class="post-card-footer">
+            <span class="post-card-read-time">7 min read</span>
+            <span class="coming-soon-badge">Coming Soon</span>
+          </div>
+        </article>
+
       </div>
-      <div class="featured-product-count">
-        <div class="count-number">3</div>
-        <div class="count-label">Products<br>reviewed</div>
+
+      <!-- NO RESULTS -->
+      <div id="no-posts" style="display:none; text-align:center; padding:48px 20px; border:2px dashed var(--border); border-radius:16px; color:var(--text-muted); font-size:0.95rem;">
+        No posts in that category yet — check back soon.
       </div>
-    </article>
-
-    <!-- POST GRID — coming soon cards -->
-    <div class="post-grid">
-
-      <article class="post-card coming-soon">
-        <span class="post-category-tag">Skincare</span>
-        <h3>Skincare Ingredients That Are Actually Worth Paying More For</h3>
-        <p>Retinol, vitamin C, niacinamide — we break down which ingredients have real evidence behind them and which ones you're paying a premium for nothing.</p>
-        <div class="post-card-footer">
-          <span class="post-card-read-time">8 min read</span>
-          <span class="coming-soon-badge">Coming Soon</span>
-        </div>
-      </article>
-
-      <article class="post-card coming-soon">
-        <span class="post-category-tag">Supplements</span>
-        <h3>The Supplements Actually Worth Taking — And the Ones That Aren't</h3>
-        <p>Most supplements are expensive urine. A handful are genuinely backed by evidence. We go through the research so you know which ones are worth your money.</p>
-        <div class="post-card-footer">
-          <span class="post-card-read-time">10 min read</span>
-          <span class="coming-soon-badge">Coming Soon</span>
-        </div>
-      </article>
-
-      <article class="post-card coming-soon">
-        <span class="post-category-tag">Sleep</span>
-        <h3>Is a Weighted Blanket Worth It? What the Evidence Actually Says</h3>
-        <p>Weighted blankets are everywhere. We look at the clinical evidence, the different weights and materials, and whether the premium price tags are justified.</p>
-        <div class="post-card-footer">
-          <span class="post-card-read-time">7 min read</span>
-          <span class="coming-soon-badge">Coming Soon</span>
-        </div>
-      </article>
 
     </div>
 
