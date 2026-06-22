@@ -842,3 +842,54 @@ footer a:hover { color: var(--accent); }
   .post-grid { grid-template-columns: 1fr; }
   .section-header { flex-direction: column; }
 }
+
+
+/* ── HOMEPAGE FILTER BAR ──────────────────────────────────────
+   Added: category filter pills on the homepage post listing
+   ──────────────────────────────────────────────────────────── */
+
+.homepage-filter {
+  margin-bottom: 28px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.homepage-filter-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+}
+
+.homepage-filter-pills button {
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  font-weight: 500;
+  font-family: var(--font-body);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.homepage-filter-pills button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-light);
+}
+
+.homepage-filter-pills button.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .homepage-filter-pills button {
+    padding: 8px 14px;
+    font-size: 0.82rem;
+  }
+}
