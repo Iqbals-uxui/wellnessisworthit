@@ -364,10 +364,11 @@
     let currentCategory = 'all';
 
     function setCategory(cat, btn) {
-      currentCategory = cat;
-      document.querySelectorAll('.category-pills button').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      filterProducts();
+  currentCategory = cat;
+  document.querySelectorAll('.category-pills button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterProducts();
+  document.getElementById('recommendations').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     function filterProducts() {
