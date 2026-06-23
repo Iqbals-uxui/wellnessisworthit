@@ -893,3 +893,104 @@ footer a:hover { color: var(--accent); }
     font-size: 0.82rem;
   }
 }
+
+
+/* ── PLACEHOLDER BANNER (dummy posts only) ────────────────────
+   Remove this from posts once real content is in place
+   ──────────────────────────────────────────────────────────── */
+
+.placeholder-banner {
+  background: #fff8e1;
+  border: 1.5px solid #f59e0b;
+  border-radius: var(--radius-sm);
+  padding: 12px 18px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #92400e;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+[data-theme="dark"] .placeholder-banner {
+  background: #2a1f00;
+  border-color: #b45309;
+  color: #fbbf24;
+}
+
+
+/* ── CATEGORY PAGE HERO ───────────────────────────────────────
+   Smaller, focused hero used on skincare.html, sleep.html etc
+   ──────────────────────────────────────────────────────────── */
+
+.category-hero {
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 56px 20px 48px;
+}
+
+.category-hero-inner {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.category-hero h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -1px;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+
+.category-hero h1 span { color: var(--accent); }
+
+.category-hero p {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+.category-hero .back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-bottom: 20px;
+  transition: color 0.2s;
+}
+.category-hero .back-link:hover { color: var(--accent); }
+
+.category-hero .meta-tag {
+  display: inline-block;
+  padding: 5px 12px;
+  background: var(--accent-light);
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.75rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+  font-family: var(--font-heading);
+}
+
+.category-post-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  font-size: 0.82rem;
+  color: var(--text-faint);
+  font-weight: 500;
+}
+
+/* Nav active state for category pages */
+.nav-links a.active {
+  color: var(--accent);
+  font-weight: 600;
+}
