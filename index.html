@@ -10,20 +10,19 @@
 </head>
 <body>
 
-  <!-- DISCLOSURE -->
   <div class="disclosure-banner">
     <strong>Disclosure:</strong> This site contains affiliate links. As an Amazon Associate we earn from qualifying purchases — at no extra cost to you.
   </div>
 
-  <!-- NAV -->
   <header>
     <div class="nav-container">
       <a href="index.html" class="logo">Wellness<span>IsWorthIt</span>.</a>
       <ul class="nav-links">
-        <li><a href="index.html">All Posts</a></li>
-        <li><a href="#">Skincare</a></li>
-        <li><a href="#">Supplements</a></li>
-        <li><a href="#">Sleep</a></li>
+        <li><a href="index.html" class="active">All Posts</a></li>
+        <li><a href="wellness-gear.html">Wellness Gear</a></li>
+        <li><a href="skincare.html">Skincare</a></li>
+        <li><a href="supplements.html">Supplements</a></li>
+        <li><a href="sleep.html">Sleep</a></li>
       </ul>
       <div class="nav-actions">
         <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
@@ -35,21 +34,19 @@
     </div>
   </header>
 
-  <!-- SITE HERO -->
   <section class="site-hero">
     <div class="site-hero-inner">
       <span class="meta-tag">✦ Evidence-Based Picks</span>
       <h1>Wellness products <span>worth</span> spending money on.</h1>
       <p>We cut through the marketing noise to find the things that actually make a difference — to your sleep, your skin, your body, and your focus. No hype. No sponsored posts.</p>
-
       <div class="site-hero-stats">
         <div class="stat-item">
-          <div class="stat-number">3</div>
+          <div class="stat-number">13</div>
           <div class="stat-label">Products reviewed</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number">1</div>
-          <div class="stat-label">Post published</div>
+          <div class="stat-number">5</div>
+          <div class="stat-label">Posts published</div>
         </div>
         <div class="stat-item">
           <div class="stat-number">0</div>
@@ -59,12 +56,11 @@
     </div>
   </section>
 
-  <!-- POST LISTING -->
   <section class="posts-section">
 
     <div class="section-header">
       <h2 class="section-title">Latest Posts</h2>
-      <span class="section-subtitle" id="post-count">4 topics across all categories</span>
+      <span class="section-subtitle" id="post-count">5 posts across all categories</span>
     </div>
 
     <!-- CATEGORY FILTER BAR -->
@@ -78,22 +74,21 @@
       </ul>
     </div>
 
-    <!-- ALL CARDS WRAPPER — filtered together -->
     <div id="post-listing">
 
-      <!-- FEATURED POST -->
-      <article class="post-card-featured" data-post-category="wellness-gear">
+      <!-- FEATURED — most recent post -->
+      <article class="post-card-featured" data-post-category="sleep">
         <div>
           <span class="featured-badge">Latest Post</span>
-          <span class="post-category-tag">Wellness Gear</span>
-          <h2>Wellness Upgrades That Are Actually Worth the Money</h2>
-          <p>Three products we think are genuinely worth spending money on — a blackout silk sleep mask, a cork foam roller, and a daylight therapy lamp. We explain exactly why each one earns its price tag.</p>
+          <span class="post-category-tag">Sleep</span>
+          <h2>Sleep Supplements That Are Actually Worth Taking</h2>
+          <p>Magnesium threonate, ashwagandha KSM-66, L-theanine — which sleep supplements have real evidence behind them, what dose matters, and which popular ones aren't worth the money.</p>
           <div class="post-meta">
             <span>Updated June 2026</span>
             <span>·</span>
-            <span>6 min read</span>
+            <span>9 min read</span>
           </div>
-          <a href="posts/wellness-upgrades-worth-the-money.html" class="btn-read-post">Read Post →</a>
+          <a href="posts/sleep-supplements-worth-taking.html" class="btn-read-post">Read Post →</a>
         </div>
         <div class="featured-product-count">
           <div class="count-number">3</div>
@@ -104,39 +99,48 @@
       <!-- POST GRID -->
       <div class="post-grid" id="post-grid">
 
-        <article class="post-card coming-soon" data-post-category="skincare">
-          <span class="post-category-tag">Skincare</span>
-          <h3>Skincare Ingredients That Are Actually Worth Paying More For</h3>
-          <p>Retinol, vitamin C, niacinamide — we break down which ingredients have real evidence behind them and which ones you're paying a premium for nothing.</p>
-          <div class="post-card-footer">
-            <span class="post-card-read-time">8 min read</span>
-            <span class="coming-soon-badge">Coming Soon</span>
-          </div>
-        </article>
-
-        <article class="post-card coming-soon" data-post-category="supplements">
-          <span class="post-category-tag">Supplements</span>
-          <h3>The Supplements Actually Worth Taking — And the Ones That Aren't</h3>
-          <p>Most supplements are expensive urine. A handful are genuinely backed by evidence. We go through the research so you know which ones are worth your money.</p>
-          <div class="post-card-footer">
-            <span class="post-card-read-time">10 min read</span>
-            <span class="coming-soon-badge">Coming Soon</span>
-          </div>
-        </article>
-
-        <article class="post-card coming-soon" data-post-category="sleep">
+        <article class="post-card" data-post-category="sleep">
           <span class="post-category-tag">Sleep</span>
           <h3>Is a Weighted Blanket Worth It? What the Evidence Actually Says</h3>
-          <p>Weighted blankets are everywhere. We look at the clinical evidence, the different weights and materials, and whether the premium price tags are justified.</p>
+          <p>Weighted blankets, sunrise alarms and sleep devices — we look at the clinical evidence and whether the premium price tags are justified.</p>
           <div class="post-card-footer">
             <span class="post-card-read-time">7 min read</span>
-            <span class="coming-soon-badge">Coming Soon</span>
+            <a href="posts/weighted-blanket-worth-it.html" class="post-card-link">Read Post →</a>
+          </div>
+        </article>
+
+        <article class="post-card" data-post-category="supplements">
+          <span class="post-category-tag">Supplements</span>
+          <h3>The Supplements Actually Worth Taking — And the Ones That Aren't</h3>
+          <p>Magnesium, vitamin D, omega-3, creatine — the ones with genuine clinical evidence, at the right dose, in the right form.</p>
+          <div class="post-card-footer">
+            <span class="post-card-read-time">10 min read</span>
+            <a href="posts/supplements-worth-taking.html" class="post-card-link">Read Post →</a>
+          </div>
+        </article>
+
+        <article class="post-card" data-post-category="skincare">
+          <span class="post-category-tag">Skincare</span>
+          <h3>Skincare Ingredients That Are Actually Worth Paying More For</h3>
+          <p>Retinol, BHA, vitamin C — which ingredients have real evidence, which products deliver them properly, and which are overpriced.</p>
+          <div class="post-card-footer">
+            <span class="post-card-read-time">8 min read</span>
+            <a href="posts/skincare-ingredients-worth-paying-for.html" class="post-card-link">Read Post →</a>
+          </div>
+        </article>
+
+        <article class="post-card" data-post-category="wellness-gear">
+          <span class="post-category-tag">Wellness Gear</span>
+          <h3>Wellness Upgrades That Are Actually Worth the Money</h3>
+          <p>A blackout silk sleep mask, a cork foam roller, and a daylight therapy lamp — three products that earn their price tag.</p>
+          <div class="post-card-footer">
+            <span class="post-card-read-time">6 min read</span>
+            <a href="posts/wellness-upgrades-worth-the-money.html" class="post-card-link">Read Post →</a>
           </div>
         </article>
 
       </div>
 
-      <!-- NO RESULTS -->
       <div id="no-posts" style="display:none; text-align:center; padding:48px 20px; border:2px dashed var(--border); border-radius:16px; color:var(--text-muted); font-size:0.95rem;">
         No posts in that category yet — check back soon.
       </div>
@@ -145,7 +149,6 @@
 
   </section>
 
-  <!-- HOMEPAGE NEWSLETTER -->
   <section class="homepage-newsletter">
     <div class="homepage-newsletter-inner">
       <h2>No sponsored noise.</h2>
@@ -157,7 +160,6 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
       <span>© 2026 WellnessIsWorthIt. All rights reserved.</span>
